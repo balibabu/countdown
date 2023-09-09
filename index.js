@@ -81,8 +81,33 @@ function resetTimer() {
 
 function playBeepSound() {
     const beep = new Audio('beep.mp3'); // Replace 'beep.mp3' with your beep sound file
-    beep.play();
+    // beep.play();
+    playGeneratedBeep();
+
 }
+
+function playGeneratedBeep() {
+    // Create an audio context
+    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+
+    // Create an oscillator node (generates sound)
+    const oscillator = audioContext.createOscillator();
+
+    // Set the oscillator frequency to 300Hz
+    oscillator.frequency.setValueAtTime(350, audioContext.currentTime);
+
+    // Connect the oscillator to the audio output (your speakers)
+    oscillator.connect(audioContext.destination);
+
+    // Start the oscillator
+    oscillator.start();
+
+    // Stop the oscillator after 0.5 seconds (500 milliseconds)
+    oscillator.stop(audioContext.currentTime + 0.5);
+}
+
+// Call the function to play the generated beep sound
+
 
 function clearFields() {
     hoursInput.value = '0';
@@ -94,4 +119,4 @@ function clearFields() {
 startButton.addEventListener('click', startTimer);
 stopButton.addEventListener('click', stopTimer); // Add this event listener
 resetButton.addEventListener('click', resetTimer);
-clearButton.addEventListener('click',clearFields);
+clearButton.addEventListener('click', clearFields);
