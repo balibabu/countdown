@@ -3,6 +3,7 @@ const minutesInput = document.getElementById('minutes');
 const secondsInput = document.getElementById('seconds');
 const startButton = document.getElementById('start');
 const stopButton = document.getElementById('stop');
+const clearButton = document.getElementById('clear');
 const resetButton = document.getElementById('reset');
 const timerDisplay = document.getElementById('timer');
 let timerInterval;
@@ -83,6 +84,14 @@ function playBeepSound() {
     beep.play();
 }
 
+function clearFields() {
+    hoursInput.value = '0';
+    minutesInput.value = '0';
+    secondsInput.value = '0';
+}
+
+
 startButton.addEventListener('click', startTimer);
 stopButton.addEventListener('click', stopTimer); // Add this event listener
 resetButton.addEventListener('click', resetTimer);
+clearButton.addEventListener('click',clearFields);
